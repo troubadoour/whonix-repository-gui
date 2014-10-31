@@ -4,12 +4,12 @@ from PyQt4 import QtCore, QtGui
 import os, glob
 
 
-class whonix_repository_Settings():
+class whonix_repository_Config():
   # default
   WHONIX_REPOSITORY_ENABLED = True
   WHONIX_REPOSITORY = '"wheezy"'
 
-  # read Whonix Repository settings.
+  # read Whonix Repository config.
   def read(self):
     if os.path.exists('/root/.test.d/'):
       files = sorted(glob.glob('/root/.test.d/*'))
@@ -84,7 +84,7 @@ WHONIX_APT_REPOSITORY_DISTRIBUTION_CONFIG="""
 class whonix_repository_Dialog(QtGui.QDialog):
   def __init__(self):
     super(whonix_repository_Dialog, self).__init__()
-    self.settings = whonix_repository_Settings()
+    self.config = whonix_repository_Config()
     self.initUI()
 
   def initUI(self):
@@ -137,20 +137,20 @@ along with updates from the Debian team. Please read <a href=https://www.whonix.
     self.devOption.setGeometry(QtCore.QRect(14, 62, 300, 21))
     self.devOption.setText('Whonix Developpers Repository')
 
-    self.settings.read()
-    # set the GUI to the current settings.
-    if self.settings.WHONIX_REPOSITORY_ENABLED:
+    self.config.read()
+    # set the GUI to the current configuration.
+    if self.config.WHONIX_REPOSITORY_ENABLED:
       self.enableButton.setChecked(True)
       self.disableButton.setChecked(False)
     else:
       self.enableButton.setChecked(False)
       self.disableButton.setChecked(True)
       self.repoGroup.setEnabled(False)
-    if self.settings.WHONIX_REPOSITORY == '"wheezy"':
+    if self.config.WHONIX_REPOSITORY == '"wheezy"':
       self.stabeOption.setChecked(True)
-    elif self.settings.WHONIX_REPOSITORY == '"testers"':
+    elif self.config.WHONIX_REPOSITORY == '"testers"':
       self.testersOption.setChecked(True)
-    elif self.settings.WHONIX_REPOSITORY == '"developers"':
+    elif self.config.WHONIX_REPOSITORY == '"developers"':
       self.devOption.setChecked(True)
 
     self.exec_()
@@ -162,20 +162,20 @@ along with updates from the Debian team. Please read <a href=https://www.whonix.
     self.repoGroup.setEnabled(False)
 
   def OK_Pressed(self):
-    # set user settings
+    # set user config
     if self.enableButton.isChecked():
-      self.settings.WHONIX_REPOSITORY_ENABLED = True
+      self.config.WHONIX_REPOSITORY_ENABLED = True
     elif self.disableButton.isChecked():
-      self.settings.WHONIX_REPOSITORY_ENABLED = False
+      self.config.WHONIX_REPOSITORY_ENABLED = False
     if self.stabeOption.isChecked():
-      self.settings.WHONIX_REPOSITORY = '"wheezy"'
+      self.config.WHONIX_REPOSITORY = '"wheezy"'
     elif self.testersOption.isChecked():
-      self.settings.WHONIX_REPOSITORY = '"testers"'
+      self.config.WHONIX_REPOSITORY = '"testers"'
     elif self.devOption.isChecked():
-      self.settings.WHONIX_REPOSITORY = '"developers"'
+      self.config.WHONIX_REPOSITORY = '"developers"'
 
     self.close()
-    self.settings.write()
+    self.config.write()
 
 
 def main():
