@@ -11,6 +11,8 @@ class whonix_repository_Dialog(QtGui.QDialog):
 
   def initUI(self):
     self.resize(599, 360)
+    icon = "/usr/share/icons/anon-icon-pack/whonix.ico"
+    self.setWindowIcon(QtGui.QIcon(icon))
     self.setWindowTitle("Whonix Repository")
 
     self.buttonBox = QtGui.QDialogButtonBox(self)
