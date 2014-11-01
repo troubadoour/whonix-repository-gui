@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from PyQt4 import QtCore, QtGui
-import subprocess
+import os, subprocess
 from subprocess import call
 
 class whonix_repository_Dialog(QtGui.QDialog):
@@ -94,6 +94,9 @@ along with updates from the Debian team. Please read <a href=https://www.whonix.
 
 def main():
   import sys
+  if os.getuid() != 0:
+    print 'ERROR: This must be run as root!'
+    sys.exit(1)
   app = QtGui.QApplication(sys.argv)
   dialog = whonix_repository_Dialog()
   sys.exit()
