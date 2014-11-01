@@ -88,8 +88,7 @@ along with updates from the Debian team. Please read <a href=https://www.whonix.
 
     self.close()
     command = 'whonix_repository' + enabled + codename
-    print command
-    subprocess.call(command, shell=True)
+    call(command, shell=True)
 
 
 def main():
