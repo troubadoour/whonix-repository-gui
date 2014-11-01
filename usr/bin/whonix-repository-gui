@@ -35,6 +35,8 @@ along with updates from the Debian team. Please read <a href=https://www.whonix.
     self.label.setTextFormat(QtCore.Qt.RichText)
     self.label.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
     self.label.setWordWrap(True)
+    self.label.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse | QtCore.Qt.TextSelectableByMouse)
+    self.label.setOpenExternalLinks(True)
     self.label.setText(message)
 
     self.enableGroup = QtGui.QGroupBox(self)
